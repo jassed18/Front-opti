@@ -1,0 +1,181 @@
+// src/Chat.scss
+
+/* Colores principales */
+$primary: #007bff;
+$primary-dark: #0056b3;
+$secondary: #6c757d;
+$dark-gray: #d0d0d0; /* Gris oscuro para el botón de seleccionar archivo */
+$dark-gray-hover: #b0b0b0; /* Gris más oscuro para el estado hover */
+
+/* Estilo para el fondo principal del body */
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, $primary, $primary-dark, $secondary);
+  margin: 0;
+  padding: 0;
+}
+
+/* Estilo para el contenedor principal */
+.app {
+  max-width: 800px;
+  margin: 20px auto;  /* Centrado horizontalmente */
+  padding: 30px;
+  background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco semi-transparente */
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  color: #333333; /* Color de texto oscuro para contraste */
+}
+
+/* Estilo para la sección unificada */
+.unifiedSection {
+  background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco semi-transparente */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px; /* Separación entre elementos dentro de la sección */
+}
+
+/* Separar el título del resto del contenido */
+.unifiedSection h2 {
+  margin-bottom: 20px; /* Espacio debajo del título */
+  color: #333333;
+}
+
+/* Contenedor para el input y botones */
+.inputButtonsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Espacio entre el campo de entrada y los botones */
+  width: 100%;
+}
+
+/* Contenedor para la carga de archivo y botón de subir PDF */
+.fileUploadSection {
+  display: flex;
+  flex-direction: column; /* Organiza los botones verticalmente */
+  gap: 15px; /* Espacio entre los botones de cargar y subir PDF */
+  width: 100%;
+}
+
+/* Estilo para el botón de seleccionar archivo */
+.custom-file-upload {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  max-width: 250px; /* Tamaño máximo del botón */
+  cursor: pointer;
+  border-radius: 8px;
+  background-color: $dark-gray; /* Gris oscuro */
+  color: #333333;
+  padding: 8px 12px; /* Ajuste del tamaño */
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, transform 0.2s;
+
+  &:hover {
+    background-color: $dark-gray-hover; /* Gris más oscuro al pasar el mouse */
+  }
+
+  &:active {
+    transform: scale(1.05);
+  }
+}
+
+/* Estilo para el input de tipo file dentro del botón */
+.custom-file-upload input[type="file"] {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+/* Icono para el botón de seleccionar archivo */
+.custom-file-upload i {
+  font-size: 16px; /* Tamaño del ícono reducido */
+  margin-right: 8px;
+}
+
+/* Estilo para el campo de entrada */
+.unifiedInput {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 2px solid #fbbf24;
+  box-shadow: 0 5px 10px rgba(251, 191, 36, 0.2);
+  font-size: 16px;
+}
+
+/* Estilo para los botones */
+.button {
+  flex: 1;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: white;
+}
+
+.uploadButton {
+  background-color: $primary;
+}
+
+.uploadButton:hover {
+  background-color: $primary-dark;
+}
+
+.questionButton {
+  background-color: #fbbf24;
+}
+
+.questionButton:hover {
+  background-color: #d97706;
+}
+
+.button:active {
+  transform: scale(1.05);
+}
+
+/* Estilo para el área de respuesta */
+.responseArea {
+  background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco semi-transparente */
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 20px;
+  min-height: 100px;
+  overflow: auto;
+}
+
+/* Estilo para el área de fuentes */
+.sourcesArea {
+  background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco semi-transparente */
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+/* Estilo para la lista de fuentes */
+.sourcesList {
+  list-style-type: none;
+  padding: 0;
+  color: #333333; /* Texto oscuro para mejor legibilidad */
+}
+
+/* Estilo para los ítems de la lista de fuentes */
+.sourceItem {
+  background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco semi-transparente */
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+}

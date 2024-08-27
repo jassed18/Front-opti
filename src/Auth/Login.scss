@@ -1,0 +1,67 @@
+// src/styles/Login.scss
+
+// Variables de colores
+$primary: #007bff;
+$primary-dark: #0056b3;
+$hover-light: rgba(0, 123, 255, 0.8);
+$focus-light: rgba(0, 123, 255, 0.5);
+$border-radius: 25px;
+$box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+$transition-time: 0.3s;
+
+// Botón de ingresar
+.btn-primary {
+  border-radius: $border-radius;
+  padding: 12px 20px;
+  font-weight: bold;
+  font-size: 16px;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, $primary, darken($primary, 10%));
+  color: #fff;
+  border: none;
+  box-shadow: $box-shadow;
+  transition: all $transition-time ease-in-out;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+
+  // Efecto de pulso
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: rgba(0, 123, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform $transition-time ease;
+  }
+
+  &:hover {
+    background: linear-gradient(135deg, darken($primary, 10%), darken($primary, 20%));
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px);
+    color: #fff;
+  }
+
+  &:active {
+    background: linear-gradient(135deg, darken($primary, 20%), darken($primary, 30%));
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(0);
+
+    &::after {
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem $focus-light;
+  }
+
+  .spinner-border {
+    margin-right: 8px;
+  }
+}

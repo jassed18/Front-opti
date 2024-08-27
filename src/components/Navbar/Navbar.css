@@ -1,0 +1,56 @@
+/* Navbar.scss */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #343a40; /* Gris oscuro elegante */
+    padding: 15px 20px; /* Aumenta el padding para mayor espacio interno */
+    color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil para dar profundidad */
+    border-bottom: 1px solid #454d55; /* Línea de borde sutil */
+  }
+  
+  .navbar-logo {
+    margin-left: 20px; /* Espacio adicional desde la izquierda */
+    margin-top: 5px; /* Espacio adicional desde la parte superior */
+  }
+  
+  .navbar-logo img {
+    height: 40px; /* Ajusta el tamaño del logo */
+  }
+  
+  .logout-button {
+    background-color: #007bff; /* Azul elegante */
+    color: #ffffff; /* Texto blanco */
+    border: none;
+    border-radius: 5px;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Espacio entre el icono y el texto */
+    margin-right: 20px; /* Espacio adicional desde la derecha */
+  }
+  
+  .logout-button:hover {
+    background-color: red; /* Azul más oscuro en hover */
+    transform: scale(1.05); /* Aumenta ligeramente el tamaño al pasar el ratón */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra más intensa */
+  }
+  
+  .logout-button:active {
+    background-color: #004085; /* Azul aún más oscuro en click */
+    transform: scale(1.02); /* Reduce ligeramente el tamaño al hacer clic */
+  }
+  
+  .logout-button i {
+    font-size: 16px; /* Tamaño del icono ajustado */
+  }
+  
+  .logout-button span {
+    margin-left: 4px; /* Espacio entre el icono y el texto ajustado */
+  }
+  

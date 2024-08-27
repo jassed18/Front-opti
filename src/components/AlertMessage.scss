@@ -1,0 +1,60 @@
+// Estilos generales para el contenedor de alertas
+.alert-message {
+    padding: 1rem;
+    border-radius: 0.375rem; // border-radius: 6px
+    margin-bottom: 1rem; // espacio en la parte inferior
+    font-size: 1rem; // tamaño de fuente
+    font-weight: 400; // peso de la fuente
+    position: relative; // posición para el icono de cierre
+  
+    // Variantes de color para diferentes tipos de alertas
+    &.alert-info {
+      background-color: var(--message-info-backgorund);
+      color: var(--message-info-color);
+      border: 1px solid #d6f3f6; // borde ligero para información
+    }
+  
+    &.alert-danger {
+      background-color: var(--danger-light);
+      color: var(--danger);
+      border: 1px solid var(--danger);
+    }
+  
+    &.alert-success {
+      background-color: #d4edda; // verde claro para éxito
+      color: #155724; // verde oscuro para el texto
+      border: 1px solid #c3e6cb; // borde verde claro
+    }
+  
+    &.alert-warning {
+      background-color: #fff3cd; // amarillo claro para advertencia
+      color: #856404; // amarillo oscuro para el texto
+      border: 1px solid #ffeeba; // borde amarillo claro
+    }
+  
+    // Estilo para el icono de cierre
+    .close {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 0.75rem 1.25rem;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: currentColor;
+      background: transparent;
+      border: 0;
+      cursor: pointer;
+      transition: color 0.15s ease-in-out;
+  
+      &:focus {
+        outline: 0;
+        box-shadow: none;
+      }
+    }
+  
+    // Estilos para el contenido del mensaje
+    .alert-message-content {
+      margin: 0;
+    }
+  }
+  

@@ -1,0 +1,7 @@
+// src/styles/main.scss
+
+@import "~bootstrap/scss/bootstrap";
+@import '../Auth/Auth';   // Importa los estilos de Auth
+@import '../components/AlertMessage';  // Importa los estilos de AlertMessage
+$warnings: false;
+// Aquí puedes agregar otros estilos globales si es necesario
