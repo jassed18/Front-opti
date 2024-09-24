@@ -8,7 +8,7 @@ function ChatApp() {
   const [response, setResponse] = useState('');
   const [sources, setSources] = useState([]);
 
-  const API_BASE_URL = 'https://back-opti.1jgnu1o1v8pl.us-south.codeengine.appdomain.cloud';
+  const API_BASE_URL = 'https://backend-clasificacion.1jgnu1o1v8pl.us-south.codeengine.appdomain.cloud';
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
