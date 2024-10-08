@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './Chat.scss';  // Importa el archivo CSS
+import { useAuth } from '../../context/AuthContext';
 
 function ChatApp() {
+  const authState = useAuth();
   const [file, setFile] = useState(null);
   const [prompt, setPrompt] = useState('');
   const [response, setResponse] = useState('');
   const [sources, setSources] = useState([]);
 
-  const API_BASE_URL = 'https://backend-clasificacion.1jgnu1o1v8pl.us-south.codeengine.appdomain.cloud';
+  const API_BASE_URL = 'http://127.0.0.1:5002';
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -40,7 +42,13 @@ function ChatApp() {
 
     try {
       const res = await axios.post(`${API_BASE_URL}/chat`, {
-        prompt: prompt.trim()
+        message: prompt.trim(),
+        user_id: authState.user.id
+      }, {
+        headers: {
+          'Authorization': `Bearer ${authState.token}`,
+          'Content-Type': 'application/json'
+        }
       });
       if (res.data.response.result) {
         setResponse(res.data.response.result);

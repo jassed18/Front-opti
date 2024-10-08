@@ -12,22 +12,29 @@ const App = () => {
   return (
     <AuthProvider>
       <Router>
-          <Routes>
-            {/* Ruta para autenticación */}
-            <Route path="/auth" element={<Auth />} />
-            <Route path="/login" element={<Auth />} />
+        <Routes>
+          {/* Ruta para autenticación */}
+          <Route path="/auth" element={<Auth />} />
+          <Route path="/login" element={<Auth />} />
 
-            {/* Ruta para el chat protegida */}
-            <Route path="/chat" element={
-              <>
-                <Navbar />  {/* Muestra el Navbar solo en la ruta /chat */}
-                <PrivateRoute element={<Chat />} />
-              </>
-            } />
+          {/* Ruta para el chat protegida */}
+          <Route
+            path="/chat"
+            element={
+              <PrivateRoute
+                element={
+                  <>
+                    <Navbar />
+                    <Chat />
+                  </>
+                }
+              />
+            }
+          />
 
-            {/* Redirige desde la raíz a la ruta de autenticación */}
-            <Route path="/" element={<Auth />} />
-          </Routes>
+          {/* Redirige desde la raíz a la ruta de autenticación */}
+          <Route path="/" element={<Auth />} />
+        </Routes>
       </Router>
     </AuthProvider>
   );

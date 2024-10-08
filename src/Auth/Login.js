@@ -1,9 +1,11 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { GoogleLogin } from '@react-oauth/google';
+import { jwtDecode } from "jwt-decode";
 import Logo from '../assets/images/Eslogan.png';
-import { AuthContext } from '../context/AuthContext';
+import { AuthContext, useAuth } from '../context/AuthContext'; // Añade useAuth aquí
 import AlertMessage from '../components/AlertMessage';
-import './Login.scss'; // Asegúrate de que la ruta del archivo SCSS es correcta
+import './Login.scss';
 
 const Login = ({ children }) => {
   const init_form = {
@@ -11,6 +13,7 @@ const Login = ({ children }) => {
     password: '',
   };
 
+  const { login } = useAuth(); // Extrae login del contexto
   const authContext = useContext(AuthContext);
   const navigate = useNavigate();
   const [form, setForm] = useState(init_form);
@@ -30,22 +33,67 @@ const Login = ({ children }) => {
     setLoading(true);
     setError('');
 
-    const validUsername = 'admin';
-    const validPassword = 'admin';
+    try {
+      // Aquí deberías hacer una llamada a tu API para autenticar al usuario
+      // Por ahora, usaremos la lógica de autenticación simulada
+      const validUsername = 'admin';
+      const validPassword = 'admin';
 
-    if (form.username === validUsername && form.password === validPassword) {
-      try {
+      if (form.username === validUsername && form.password === validPassword) {
         await authContext.login('dummyToken', { username: form.username });
         navigate('/chat');
-      } catch (err) {
-        setError('Error al iniciar sesión.');
+      } else {
+        setError('Usuario o contraseña incorrecta.');
       }
-      setLoading(false);
-    } else {
-      setError('Usuario o contraseña incorrecta.');
+    } catch (err) {
+      setError('Error al iniciar sesión.');
+    } finally {
       setLoading(false);
     }
   };
+
+  // ... (importaciones y código inicial sin cambios)
+
+  const handleGoogleSuccess = async (credentialResponse) => {
+    try {
+      console.log("Credential Response:", credentialResponse);
+      const decoded = jwtDecode(credentialResponse.credential);
+      console.log("Decoded:", decoded);
+      const email = decoded.email;
+      const google_id = decoded.sub;
+  
+      console.log("Sending request to:", '/auth/google');
+      const response = await fetch('/auth/google', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ correoElectronico: email, google_id }),
+      });
+  
+      console.log("Response status:", response.status);
+      const responseText = await response.text();
+      console.log("Response text:", responseText);
+  
+      if (response.ok) {
+        const data = JSON.parse(responseText);
+        console.log('Datos de autenticación recibidos:', data);
+        await login({
+          id: data.user_id,
+          email: data.correoElectronico,
+          token: data.token
+        });
+        console.log('Autenticación exitosa, redirigiendo a /chat');
+        navigate('/chat');
+      } else {
+        setError('Error al iniciar sesión con Google: ' + (responseText || 'Error desconocido'));
+      }
+    } catch (err) {
+      console.error("Error completo:", err);
+      setError('Error al procesar la autenticación de Google: ' + err.message);
+    }
+  };
+
 
   const disabledSubmit = () =>
     form.username.length > 3 &&
@@ -133,6 +181,13 @@ const Login = ({ children }) => {
               'INGRESAR'
             )}
           </button>
+        </div>
+        <div className="d-grid gap-2 mt-3">
+          <GoogleLogin
+            onSuccess={handleGoogleSuccess}
+            onError={() => setError('Error al iniciar sesión con Google')}
+            useOneTap
+          />
         </div>
         {children}
       </form>
