@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import Avatar from "../assets/images/avatar2.jpg";
 import Login from "../Auth/Login";
@@ -12,6 +12,10 @@ console.log("Google cliente ID:", process.env.REACT_APP_GOOGLE_CLIENT_ID);
 
 const Auth = () => {
   const [isSignIn, setIsSignIn] = useState(true);
+
+  useEffect(() => {
+    localStorage.removeItem('authState');
+  }, []);
 
   const changeForm = (event) => {
     event.preventDefault();

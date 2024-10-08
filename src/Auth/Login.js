@@ -52,7 +52,6 @@ const Login = ({ children }) => {
     }
   };
 
-  // ... (importaciones y código inicial sin cambios)
 
   const handleGoogleSuccess = async (credentialResponse) => {
     try {
@@ -61,7 +60,7 @@ const Login = ({ children }) => {
       console.log("Decoded:", decoded);
       const email = decoded.email;
       const google_id = decoded.sub;
-  
+
       console.log("Sending request to:", '/auth/google');
       const response = await fetch('/auth/google', {
         method: 'POST',
@@ -70,19 +69,33 @@ const Login = ({ children }) => {
         },
         body: JSON.stringify({ correoElectronico: email, google_id }),
       });
-  
+
       console.log("Response status:", response.status);
       const responseText = await response.text();
       console.log("Response text:", responseText);
-  
+
       if (response.ok) {
         const data = JSON.parse(responseText);
         console.log('Datos de autenticación recibidos:', data);
+
+          // Guardar los datos en el localStorage
+          const authState = {
+            isAuthenticated: true,
+            user: {
+              id: data.user_id,
+              email: data.correoElectronico
+            },
+            token: data.token
+          };
+          localStorage.setItem('authState', JSON.stringify(authState));
+
+          console.log(localStorage.getItem('authState'));
         await login({
           id: data.user_id,
           email: data.correoElectronico,
           token: data.token
         });
+        console.log("user_id:", data.user_id);
         console.log('Autenticación exitosa, redirigiendo a /chat');
         navigate('/chat');
       } else {
@@ -97,9 +110,9 @@ const Login = ({ children }) => {
 
   const disabledSubmit = () =>
     form.username.length > 3 &&
-    form.password.length > 3 &&
-    tc &&
-    !loading
+      form.password.length > 3 &&
+      tc &&
+      !loading
       ? false
       : true;
 

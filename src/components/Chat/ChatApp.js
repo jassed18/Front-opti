@@ -4,7 +4,7 @@ import './Chat.scss';  // Importa el archivo CSS
 import { useAuth } from '../../context/AuthContext';
 
 function ChatApp() {
-  const authState = useAuth();
+  const {authState} = useAuth();
   const [file, setFile] = useState(null);
   const [prompt, setPrompt] = useState('');
   const [response, setResponse] = useState('');
